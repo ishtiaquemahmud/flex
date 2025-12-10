@@ -28,6 +28,7 @@ struct Symbol {
     int getNum(char* name);
     float getReal(char* name);
     int checkType (char* name);
+    void readInput(int type, char* name);
     
 %}
 
@@ -44,6 +45,7 @@ struct Symbol {
 %token <real> FRACTION
 %token <text> NAME
 %token MAKE
+%token TAKE
 %token PLUS
 %token SEMICOLON
 %token QUOTE
@@ -83,6 +85,12 @@ line:
 |   MAKE FLOAT NAME EQUAL exp2 SEMICOLON {storeReal($3, $5);printf("%f is the value\n",$5);}
 |   MAKE FLOAT NAME EQUAL exp2 SEMICOLON EOL {storeReal($3, $5);printf("%f is the value\n",$5);}
 |   MAKE CHAR NAME EQUAL QUOTE NAME QUOTE SEMICOLON {storeText($3, $6);printf("%s is the value \n",$6)}
+|   TAKE INT NAME SEMICOLON { readInput(1, $3); }
+|   TAKE FLOAT NAME SEMICOLON { readInput(2, $3); }
+|   TAKE CHAR NAME SEMICOLON { readInput(3, $3); }
+|   TAKE INT NAME SEMICOLON EOL { readInput(1, $3); }
+|   TAKE FLOAT NAME SEMICOLON EOL { readInput(2, $3); }
+|   TAKE CHAR NAME SEMICOLON EOL { readInput(3, $3); }
 |   PRINT LEFTPAREN NAME RIGHTPAREN SEMICOLON {showVal($3);}
 |   PRINT LEFTPAREN VAR_INT RIGHTPAREN SEMICOLON {showVal($3);}
 |   PRINT LEFTPAREN VAR_FLOAT RIGHTPAREN SEMICOLON {showVal($3);}
@@ -197,7 +205,25 @@ void showVal(char *name) {
         printf("%s\n", symbol_table[idx].Data.val_text);
     }
 }
-
+void readInput(int type, char* name) {
+    printf("Enter value for %s: ", name);
+    
+    if (type == 1) { // INT
+        int val;
+        scanf("%d", &val);
+        storeNum(name, val);
+    } 
+    else if (type == 2) { // FLOAT
+        float val;
+        scanf("%f", &val);
+        storeReal(name, val);
+    } 
+    else if (type == 3) { // TEXT
+        char buffer[100];
+        scanf("%s", buffer); 
+        storeText(name, strdup(buffer)); // Use strdup to save the string safely
+    }
+}
 int main(void) {
     yyin = fopen("input.txt", "r");
     int res=yyparse();

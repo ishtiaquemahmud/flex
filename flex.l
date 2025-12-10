@@ -20,6 +20,7 @@ extern int checkType(char* name);
 [0-9]+ { yylval.num=atoi(yytext); return NUMBER; } // convert string to int
 
 make {return MAKE;}
+take {return TAKE;}
 num {return INT;}
 real {return FLOAT;}
 text {return CHAR;}

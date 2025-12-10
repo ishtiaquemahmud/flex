@@ -45,21 +45,22 @@
      FRACTION = 261,
      NAME = 262,
      MAKE = 263,
-     PLUS = 264,
-     SEMICOLON = 265,
-     QUOTE = 266,
-     VAR_INT = 267,
-     VAR_FLOAT = 268,
-     PRINT = 269,
-     EQUAL = 270,
-     MINUS = 271,
-     MULTIPLY = 272,
-     DIVISION = 273,
-     LEFTPAREN = 274,
-     RIGHTPAREN = 275,
-     INT = 276,
-     FLOAT = 277,
-     CHAR = 278
+     TAKE = 264,
+     PLUS = 265,
+     SEMICOLON = 266,
+     QUOTE = 267,
+     VAR_INT = 268,
+     VAR_FLOAT = 269,
+     PRINT = 270,
+     EQUAL = 271,
+     MINUS = 272,
+     MULTIPLY = 273,
+     DIVISION = 274,
+     LEFTPAREN = 275,
+     RIGHTPAREN = 276,
+     INT = 277,
+     FLOAT = 278,
+     CHAR = 279
    };
 #endif
 
@@ -70,7 +71,7 @@ typedef union YYSTYPE
 {
 
 /* Line 1676 of yacc.c  */
-#line 34 "bison.y"
+#line 35 "bison.y"
 
     int num;
     float real;
@@ -79,7 +80,7 @@ typedef union YYSTYPE
 
 
 /* Line 1676 of yacc.c  */
-#line 83 "bison.tab.h"
+#line 84 "bison.tab.h"
 } YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
